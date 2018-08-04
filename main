@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
+export DOTFILES_LOG="./dotfiles.log"
+export GITHUB_USER="xiris"
+
 source ./lib/utils
+source ./lib/setup
 
-check_dependencies
+#config ssh keys
+setup_generate_ssh_keys
 
+#check_dependencies
+exit 1;
 #execute all installation files
 for f in scripts/*.sh; 
 	do
@@ -16,12 +23,3 @@ check_dependencies() {
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 }
 
-#setup ssh and GIT user
-setup_generate_ssh_keys() {
-	local SSH_EMAIL=""
-	ssh-keygen -t rsa -b 4096 -C ""
-}
-
-setup_git() {
-
-}

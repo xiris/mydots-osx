@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+#setup ssh and GIT user
+setup_generate_ssh_keys() {
+	e_process "Setting up SSH keys"
+	
+	local SSH_EMAIL=""
+	e_question "What's your e-mail?"
+	read USER_SSH_EMAIL
+
+	if [[ ! -z "$USER_SSH_EMAIL" ]]; then
+		SSH_EMAIL="${USER_SSH_EMAIL}"
+	fi
+
+	ssh-keygen -t rsa -b 4096 -C "${SSH_EMAIL}"
+}
