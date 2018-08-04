@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+source ./lib/utils
+
+check_dependencies
+
 #execute all installation files
 for f in scripts/*.sh; 
 	do
@@ -6,7 +11,17 @@ for f in scripts/*.sh;
 	done;
 
 #check and install dependencies
-dependencies() {
+check_dependencies() {
 	xcode-select --install &> /dev/null
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+
+#setup ssh and GIT user
+setup_generate_ssh_keys() {
+	local SSH_EMAIL=""
+	ssh-keygen -t rsa -b 4096 -C ""
+}
+
+setup_git() {
+
 }

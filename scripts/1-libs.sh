@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 printf "Installing libs\n"
 
 brew install coreutils

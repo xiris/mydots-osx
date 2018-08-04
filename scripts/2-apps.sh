@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 printf "Installing Applications via Cask\n"
 
 brew cask install evernote
