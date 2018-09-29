@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-
-#setup ssh and GIT user
+https://mathiasbynens.be/notes/shell-script-mac-apps
+https://lifehacker.com/how-to-make-your-own-bulk-app-installer-for-os-x-1586252163
+#setup ssh
 setup_generate_ssh_keys() {
 	e_process "Setting up SSH keys"
 	
@@ -13,4 +14,35 @@ setup_generate_ssh_keys() {
 	fi
 
 	ssh-keygen -t rsa -b 4096 -C "${SSH_EMAIL}"
+}
+
+setup_git_user() {
+	e_process "Setting up Git author"
+
+    local GIT_AUTHOR_NAME=""
+    local GIT_AUTHOR_EMAIL=""
+
+    e_question "What's your name"
+    read USER_GIT_AUTHOR_NAME
+    if [[ ! -z "$USER_GIT_AUTHOR_NAME" ]]; then
+        GIT_AUTHOR_NAME="${USER_GIT_AUTHOR_NAME}"
+    fi
+
+    e_question "What's your email"
+    read USER_GIT_AUTHOR_EMAIL
+    if [[ ! -z "$USER_GIT_AUTHOR_EMAIL" ]]; then
+        GIT_AUTHOR_EMAIL="${USER_GIT_AUTHOR_EMAIL}"
+    fi
+
+    # set the credentials (modifies ${HOME}/.gitconfig)
+    $(git config --global user.name "$GIT_AUTHOR_NAME")
+    $(git config --global user.email "$GIT_AUTHOR_EMAIL")
+
+	e_success "Git author is $(git config user.name) <$(git config user.email)>"
+}
+
+#check and install dependencies
+check_dependencies() {
+	xcode-select --install &> /dev/null
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 }

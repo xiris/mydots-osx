@@ -1,25 +1,19 @@
 #!/usr/bin/env bash
 
 export DOTFILES_LOG="./dotfiles.log"
-export GITHUB_USER="xiris"
 
 source ./lib/utils
 source ./lib/setup
 
+#before moving on, checking some dependencies
+check_dependencies
+
 #config ssh keys
 setup_generate_ssh_keys
 
-#check_dependencies
-exit 1;
 #execute all installation files
-for f in scripts/*.sh; 
+for f in scripts/*.sh;
 	do
 		bash "$f" -H || break
 	done;
-
-#check and install dependencies
-check_dependencies() {
-	xcode-select --install &> /dev/null
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-}
 
