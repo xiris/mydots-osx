@@ -1,0 +1,18 @@
+[core]
+	filemode = false
+	editor = vim
+[user]
+	name = Christopher
+	email = chris@planner.net.br
+[alias]
+	lg = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit
+	st = status
+	co = checkout
+[branch]
+	autosetuprebase = always
+[color]
+	ui = true
+	status = auto
+	branch = auto
+[pager]
+	branch = false
